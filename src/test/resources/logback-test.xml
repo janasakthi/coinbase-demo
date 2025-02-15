@@ -1,0 +1,3 @@
+<configuration>
+    <logger name="io.cucumber" level="DEBUG"/>
+</configuration>
