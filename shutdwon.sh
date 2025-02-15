@@ -4,7 +4,7 @@
 echo "Stopping the container..."
 docker stop coinbase-demo || true
 echo "Removing the container..."
-docker rm coinbase-demo || true
+docker rm -f coinbase-demo || true
 
 echo "Container stopped and removed."
 

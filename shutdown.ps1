@@ -1,8 +1,8 @@
 # Stop and remove the container
 Write-Host "Stopping the container..."
-docker stop coinbase-demo -ErrorAction SilentlyContinue
+docker stop coinbase-demo
 Write-Host "Removing the container..."
-docker rm coinbase-demo -ErrorAction SilentlyContinue
+docker rm -f coinbase-demo
 
 Write-Host "Container stopped and removed."
 

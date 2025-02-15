@@ -3,7 +3,7 @@ echo Stopping the container...
 docker stop coinbase-demo
 
 echo Removing the container...
-docker rm coinbase-demo
+docker rm -f coinbase-demo
 
 echo Container stopped and removed.
 pause
