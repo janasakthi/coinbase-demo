@@ -38,6 +38,7 @@ public class SimulatorService {
 			throw new ValidationException("Both from and to date are required");
 		}
 		
+		log.info("from: {}, to:{}",from,to);
 		Date fromDate, toDate;
 		//Default rages set last 7 days
 		if(isFromDateEmpty || isToDateEmpty) {

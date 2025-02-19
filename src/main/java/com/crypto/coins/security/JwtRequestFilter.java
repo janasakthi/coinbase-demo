@@ -28,6 +28,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	}
 	
 	private JwtUtil jwtUtil;
+	
+	@Override
+	protected boolean shouldNotFilter(HttpServletRequest request) {
+	    String path = request.getRequestURI();
+	    return path.startsWith("/assets/") || 
+	           path.startsWith("/favicon.ico") || 
+	           path.endsWith(".js") || 
+	           path.endsWith(".css") || 
+	           path.startsWith("/api/authenticate") ||  // Skip authentication endpoint
+	           path.equals("/") ||                      // Skip root
+	           path.startsWith("/login") ||              // Skip Angular routes
+	           path.startsWith("/history");
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -35,10 +48,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		log.info("Called the Fileter");
 		// Skip JWT processing for /api/authenticate
 	    String path = request.getRequestURI();
-	    if (path.startsWith("/api/authenticate") || path.startsWith("/api/v1/bpi/historical")) {
+	    if (path.startsWith("/login") || path.startsWith("/api")==false || path.startsWith("/api/authenticate")) {
 	        chain.doFilter(request, response);
 	        return;
 	    }
+	    log.info("Auth Fiinglter");
 		final String authorizationHeader = request.getHeader("Authorization");
 
 		String username = null;

@@ -13,7 +13,7 @@ import com.crypto.coins.exception.ValidationException;
 import com.crypto.coins.service.SimulatorService;
 
 @RestController
-@RequestMapping("/api/v1/bpi/historical")
+@RequestMapping("/sim/api/v1/bpi/historical")
 public class SimController {
 	
 	@Autowired
