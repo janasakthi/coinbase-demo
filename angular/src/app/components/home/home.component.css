@@ -1,0 +1,188 @@
+ /* Fix Header Alignment */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Logo on left, Logout on right */
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo + Title Alignment */
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Bitcoin Icon */
+.bitcoin-icon {
+  font-size: 32px;
+  color: #f7931a;
+}
+
+/* Logout Button Styling */
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #b52a37;
+}
+
+/* Fix Form Alignment */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.date-field {
+  width: 250px;
+}
+
+/* Submit Button */
+.submit-button {
+  height: 50px;
+  margin:0 3px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Progress Bar */
+.loading-bar {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Table Styling */
+.mat-elevation-z8 {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* High & Low Tags */
+.high-tag {
+  background-color: #28a745;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.low-tag {
+  background-color: #dc3545;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* No Data Found */
+.no-data {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000;
+  padding: 20px;
+  background-color: #fff3f3;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+/* Logout Link */
+.logout-link {
+  color: #dc3545; /* Red color */
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.logout-link:hover {
+  color: #b52a37; /* Darker red on hover */
+  text-decoration: underline;
+}
+
+.cache-toggle {
+  display: flex;
+  align-items: left;
+  gap: 10px;
+}
+
+/* Toggle Switch Styling */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #007bff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}

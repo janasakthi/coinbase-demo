@@ -1,0 +1,88 @@
+<div class="container mt-4">
+  <!-- Header Section -->
+	<div class="header-container">
+	  <div class="logo-title">
+		<i class="fa-brands fa-bitcoin bitcoin-icon"></i>
+		<h2>Bitcoin</h2>
+	
+		<label class="switch">
+		  <input type="checkbox" [(ngModel)]="cacheEnabled" (change)="toggleCache()" />
+		  <span class="slider round"></span>
+		</label>
+		<span *ngIf="!cacheEnabled">Online Mode</span>
+		<span *ngIf="cacheEnabled">Offline Mode</span>
+	  </div>
+	  
+	  <a (click)="logout()" class="logout-link">Logout</a>
+	</div>
+
+
+  <!-- Date Filter Form -->
+  <form [formGroup]="dateRangeForm" (ngSubmit)="getHistory()" class="form-container">
+    <div class="form-row">
+      <!-- From Date -->
+      <mat-form-field appearance="fill" class="date-field">
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="fromPicker" formControlName="fromDate">
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- To Date -->
+      <mat-form-field appearance="fill" class="date-field">
+        <mat-label>To Date</mat-label>
+        <input matInput [matDatepicker]="toPicker" formControlName="toDate">
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary submit-button">Get History</button>
+    </div>
+  </form>
+ <!-- Show Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <!-- Progress Bar (Shows while loading data) -->
+  <mat-progress-bar *ngIf="loading" mode="indeterminate" class="loading-bar"></mat-progress-bar>
+
+  <!-- Historical Data Table -->
+  <div *ngIf="historyData" class="mt-4">
+    <h4>{{ historyData.code }} Rates ({{ historyData.currency }})</h4>
+    <p>Date Range: {{ historyData.fromDate }} to {{ historyData.toDate }}</p>
+    <p>Highest Price: {{ historyData.high }}</p>
+    <p>Lowest Price: {{ historyData.low }}</p>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+	  <!-- Date Column -->
+	  <ng-container matColumnDef="date">
+		<th mat-header-cell *matHeaderCellDef> <b>Date</b> </th>
+		<td mat-cell *matCellDef="let row"> {{ row.date }} </td>
+	  </ng-container>
+
+	  <!-- Price Column -->
+	  <ng-container matColumnDef="price">
+		<th mat-header-cell *matHeaderCellDef> <b>Price</b> ({{ historyData.currency }}) </th>
+		<td mat-cell *matCellDef="let row"> 
+		  {{ row.price }} 
+		  <span *ngIf="row.price == historyData.high" class="high-tag">High</span>
+		  <span *ngIf="row.price == historyData.low" class="low-tag">Low</span>
+		</td>
+	  </ng-container>
+
+	  <!-- Table Headers & Rows -->
+	  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>
+
+    <!-- Paginator -->
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <!-- No Data Found Message -->
+  <div *ngIf="!loading && (!historyData || dataSource.data.length === 0)" class="no-data">
+    <p>No Data Found</p>
+  </div>
+</div>

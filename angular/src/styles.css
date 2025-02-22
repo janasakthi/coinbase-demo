@@ -1,0 +1,41 @@
+.logout-container {
+  margin-left: auto;
+}
+
+.logout-button {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.history-button {
+  min-width: 150px;
+  height: 36px;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.date-field .mat-form-field-flex {
+  background: #fff;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.date-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.mat-datepicker-content,
+.mat-calendar {
+  background-color: white;
+}
+.error-message {
+  color: #d9534f; /* Bootstrap danger color */
+  background-color: #f8d7da; /* Light red background */
+  border: 1px solid #f5c6cb; /* Border color */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
