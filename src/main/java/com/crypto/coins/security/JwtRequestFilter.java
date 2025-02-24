@@ -32,7 +32,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) {
 	    String path = request.getRequestURI();
-	    return path.startsWith("/assets/") || 
+	    return path.startsWith("/index.html") ||
+	    	   path.startsWith("/assets/") || 
 	           path.startsWith("/favicon.ico") || 
 	           path.endsWith(".js") || 
 	           path.endsWith(".css") || 
