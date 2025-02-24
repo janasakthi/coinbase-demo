@@ -38,8 +38,8 @@ pipeline {
             steps {
                 script {
                     bat """
-                    docker stop springboot-app || true
-                    docker rm springboot-app || true
+                    docker stop springboot-app || exit 0
+                    docker rm springboot-app || exit 0
                     docker run -d -p 8080:8080 --name springboot-app $DOCKER_IMAGE
                     """
                 }
