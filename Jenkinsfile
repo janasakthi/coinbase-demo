@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'your-dockerhub-username/springboot-app:latest'
-        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+        DOCKER_IMAGE = 'janasakthi/springboot-app:latest'
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-repo/springboot-app.git'
+                git branch: 'main', url: 'https://github.com/janasakthi/coinbase-demo'
             }
         }
 
@@ -29,22 +28,19 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry([credentialsId: DOCKER_CREDENTIALS_ID, url: '']) {
-                    sh "docker push $DOCKER_IMAGE"
-                }
+				script {
+					sh "docker push $DOCKER_IMAGE"
+				}
             }
         }
 
-        stage('Deploy to Server') {
+		stage('Run Container') {
             steps {
-                sshagent(['ssh-server-credentials']) {
+                script {
                     sh """
-                    ssh user@server-ip <<EOF
-                    docker pull $DOCKER_IMAGE
                     docker stop springboot-app || true
                     docker rm springboot-app || true
                     docker run -d -p 8080:8080 --name springboot-app $DOCKER_IMAGE
-                    EOF
                     """
                 }
             }
