@@ -14,14 +14,14 @@ pipeline {
 
         stage('Build Jar') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                bat 'mvn clean package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t $DOCKER_IMAGE ."
+                    bat "docker build -t $DOCKER_IMAGE ."
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
 				script {
-					sh "docker push $DOCKER_IMAGE"
+					bat "docker push $DOCKER_IMAGE"
 				}
             }
         }
@@ -37,7 +37,7 @@ pipeline {
 		stage('Run Container') {
             steps {
                 script {
-                    sh """
+                    bat """
                     docker stop springboot-app || true
                     docker rm springboot-app || true
                     docker run -d -p 8080:8080 --name springboot-app $DOCKER_IMAGE
