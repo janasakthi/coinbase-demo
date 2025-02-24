@@ -26,13 +26,13 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+       /* stage('Push Docker Image') {
             steps {
 				script {
 					bat "docker push $DOCKER_IMAGE"
 				}
             }
-        }
+        }*/
 
 		stage('Run Container') {
             steps {
