@@ -14,20 +14,26 @@ pipeline {
         }
 
        stage('Install Dependencies') {
-			steps {
-				bat script: 'npm install', workingDir: 'angular'
+			 steps {
+				dir('angular') {
+					bat 'npm install'
+				}
 			}
 		}
 
         stage('Build Angular App') {
             steps {
-                bat script:'npm run build --prod', workingDir: 'angular'
-            }
+				dir('angular') {
+					bat script:'npm run build --prod'
+				}
+			}
         }
 
         stage('Build Docker Image') {
             steps {
-                bat script:"docker build -t $DOCKER_IMAGE .", workingDir: 'angular'
+				dir('angular') {
+					bat script:"docker build -t $DOCKER_IMAGE ."
+				}
             }
         }
 
