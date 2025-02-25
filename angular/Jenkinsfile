@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "coin-ui-app:latest"
+        CONTAINER_NAME = "coin-ui-container"
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                 git branch: 'main', url: 'https://github.com/janasakthi/coinbase-demo'
+				 bat 'cd angular'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm install'
+            }
+        }
+
+        stage('Build Angular App') {
+            steps {
+                bat 'npm run build --prod'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat "docker build -t $DOCKER_IMAGE ."
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                bat """
+                docker stop $CONTAINER_NAME || exit 0
+                docker rm $CONTAINER_NAME || exit 0
+                docker run -d -p 4200:4200 --name $CONTAINER_NAME $DOCKER_IMAGE
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Angular app deployed successfully!"
+        }
+        failure {
+            echo "❌ Deployment failed!"
+        }
+    }
+}
