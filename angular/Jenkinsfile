@@ -42,7 +42,7 @@ pipeline {
                 bat """
                 docker stop $CONTAINER_NAME || exit 0
                 docker rm $CONTAINER_NAME || exit 0
-                docker run -d -p 4200:4200 --name $CONTAINER_NAME $DOCKER_IMAGE
+                docker run -d -p 80:80 --name $CONTAINER_NAME $DOCKER_IMAGE
                 """
             }
         }
