@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Copy Angular build output from Jenkins workspace into the container
-COPY ./dist/angular-app /usr/share/nginx/html
+COPY ./dist/angular-app/browser /usr/share/nginx/html
 
 # Expose port 4200 and start Nginx
 EXPOSE 4200
