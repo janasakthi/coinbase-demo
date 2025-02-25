@@ -10,26 +10,24 @@ pipeline {
         stage('Checkout Code') {
             steps {
                  git branch: 'main', url: 'https://github.com/janasakthi/coinbase-demo'
-				 bat 'cd angular'
-            }
+			}
         }
 
         stage('Install Dependencies') {
             steps {
-				bat 'echo %cd%'
-                bat 'npm install'
+				bat 'npm install', workingDir: 'angular'
             }
         }
 
         stage('Build Angular App') {
             steps {
-                bat 'npm run build --prod'
+                bat 'npm run build --prod', workingDir: 'angular'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t $DOCKER_IMAGE ."
+                bat "docker build -t $DOCKER_IMAGE .", workingDir: 'angular'
             }
         }
 
